@@ -1,5 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { IBillet } from "../models/IBillet";
+import { createSlice } from "@reduxjs/toolkit";
 import { getCoordinates } from "../utils/getCoordinates";
 import { inintial } from "./initial";
 

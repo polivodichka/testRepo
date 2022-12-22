@@ -10,7 +10,7 @@ const Board = () => {
 
   useEffect(() => {
     dispatch(getCoordinates({ n: radius }));
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
@@ -22,9 +22,56 @@ const Board = () => {
       ))}
       <button
         onClick={() => {
-          dispatch(getCoordinates({ n: 3, oldCoordinates: coordinates}));
+          dispatch(getCoordinates({ n: 3, oldCoordinates: coordinates }));
         }}
-      >press</button>
+      >
+        press
+      </button>
+
+      <div className="container">
+        <button
+          onClick={() => {
+            dispatch(getCoordinates({ n: 3, oldCoordinates: coordinates }));
+          }}
+        >
+          top
+        </button>
+        <button
+          onClick={() => {
+            dispatch(getCoordinates({ n: 3, oldCoordinates: coordinates }));
+          }}
+        >
+          top-right
+        </button>
+        <button
+          onClick={() => {
+            dispatch(getCoordinates({ n: 3, oldCoordinates: coordinates }));
+          }}
+        >
+          top-left
+        </button>
+        <button
+          onClick={() => {
+            dispatch(getCoordinates({ n: 3, oldCoordinates: coordinates }));
+          }}
+        >
+          bottom
+        </button>
+        <button
+          onClick={() => {
+            dispatch(getCoordinates({ n: 3, oldCoordinates: coordinates }));
+          }}
+        >
+          bottom-right
+        </button>
+        <button
+          onClick={() => {
+            dispatch(getCoordinates({ n: 3, oldCoordinates: coordinates }));
+          }}
+        >
+          bottom-left
+        </button>
+      </div>
     </div>
   );
 };
