@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { radius } from "../../constants/constants";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getCoordinates } from "../../utils/getCoordinates";
 import Billet from "../Cell/Cell";
@@ -8,7 +9,7 @@ const Board = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getCoordinates({ n: 3 }));
+    dispatch(getCoordinates({ n: radius }));
   }, []);
 
   return (
