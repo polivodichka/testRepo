@@ -1,77 +1,72 @@
 import { useEffect } from "react";
 import { radius } from "../../constants/constants";
+import { EDirection } from "../../constants/EDirection";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getCoordinates } from "../../utils/getCoordinates";
-import Billet from "../Cell/Cell";
+import { transform } from "../../utils/transform";
+import Cell from "../Cell/Cell";
+import Tile from "../Tile/Tile";
 
 const Board = () => {
-  const coordinates = useAppSelector((state) => state.board.coordinates);
+  const { coordinates, tiles, keyboardIsAble } = useAppSelector((state) => {
+    return {
+      coordinates: state.board.coordinates,
+      tiles: state.board.tiles,
+      keyboardIsAble: state.board.keyboard,
+    };
+  });
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getCoordinates({ n: radius }));
+    dispatch(getCoordinates(radius));
   }, [dispatch]);
 
+  useEffect(() => {
+    const onKeypress = (e: KeyboardEvent) => {
+      const { code } = e;
+      switch (code) {
+        case "KeyW":
+          keyboardIsAble && transform(EDirection.top, dispatch);
+          break;
+        case "KeyE":
+          keyboardIsAble && transform(EDirection.topRight, dispatch);
+          break;
+        case "KeyQ":
+          keyboardIsAble && transform(EDirection.topLeft, dispatch);
+          break;
+        case "KeyS":
+          keyboardIsAble && transform(EDirection.bottom, dispatch);
+          break;
+        case "KeyD":
+          keyboardIsAble && transform(EDirection.bottomRight, dispatch);
+          break;
+        case "KeyA":
+          keyboardIsAble && transform(EDirection.bottomLeft, dispatch);
+          break;
+      }
+    };
+
+    document.addEventListener("keypress", onKeypress);
+
+    return () => {
+      document.removeEventListener("keypress", onKeypress);
+    };
+  }, [keyboardIsAble]);
+
   return (
-    <div>
+    <div className="board">
       {coordinates.map((coordinate) => (
-        <Billet
+        <Cell
           {...coordinate}
           key={`${coordinate.x}${coordinate.y}${coordinate.z}`}
         />
       ))}
-      <button
-        onClick={() => {
-          dispatch(getCoordinates({ n: 3, oldCoordinates: coordinates }));
-        }}
-      >
-        press
-      </button>
-
-      <div className="container">
-        <button
-          onClick={() => {
-            dispatch(getCoordinates({ n: 3, oldCoordinates: coordinates }));
-          }}
-        >
-          top
-        </button>
-        <button
-          onClick={() => {
-            dispatch(getCoordinates({ n: 3, oldCoordinates: coordinates }));
-          }}
-        >
-          top-right
-        </button>
-        <button
-          onClick={() => {
-            dispatch(getCoordinates({ n: 3, oldCoordinates: coordinates }));
-          }}
-        >
-          top-left
-        </button>
-        <button
-          onClick={() => {
-            dispatch(getCoordinates({ n: 3, oldCoordinates: coordinates }));
-          }}
-        >
-          bottom
-        </button>
-        <button
-          onClick={() => {
-            dispatch(getCoordinates({ n: 3, oldCoordinates: coordinates }));
-          }}
-        >
-          bottom-right
-        </button>
-        <button
-          onClick={() => {
-            dispatch(getCoordinates({ n: 3, oldCoordinates: coordinates }));
-          }}
-        >
-          bottom-left
-        </button>
-      </div>
+      {tiles.map((coordinate) => (
+        <Tile
+          {...coordinate}
+          key={`tile${coordinate.x}${coordinate.y}${coordinate.z}`}
+        />
+      ))}
     </div>
   );
 };
