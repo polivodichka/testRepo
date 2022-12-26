@@ -37,7 +37,7 @@ export const transform = (direction: EDirection, dispatch: AppDispatch) => {
   table2D = getTable2D(store.getState().board.coordinates);
   sortTable(table2D, direction);
   collapsePairs = setCollapsePairs(table2D);
-  !!collapsePairs.length && collapse(collapsePairs, dispatch, direction);
+  !!collapsePairs.length && collapse(collapsePairs, dispatch, direction, true);
 
   setTimeout(() => {
     table2D = getTable2D(store.getState().board.coordinates);

@@ -49,6 +49,9 @@ const BoardSlice = createSlice({
     setGameStatus(state, action) {
       state.gameStatus = action.payload;
     },
+    updateScore(state, action) {
+      state.score += action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getCoordinates.fulfilled, (state, action) => {
@@ -69,5 +72,6 @@ export const {
   enableKeyboard,
   setNeedNewTiles,
   setGameStatus,
+  updateScore,
 } = BoardSlice.actions;
 export default BoardSlice.reducer;

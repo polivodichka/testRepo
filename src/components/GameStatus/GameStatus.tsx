@@ -1,10 +1,18 @@
 import { useAppSelector } from "../../hooks/hooks";
 
 const GameStatus = () => {
-  const gameStatus = useAppSelector((state) => state.board.gameStatus);
+  const { gameStatus, score } = useAppSelector((state) => {
+    return {
+      gameStatus: state.board.gameStatus,
+      score: state.board.score,
+    };
+  });
   return (
     <div>
-      Game Status: <span data-status={gameStatus}>{gameStatus}</span>
+      <div>
+        Game Status: <span data-status={gameStatus}>{gameStatus}</span>
+      </div>
+      <div>Score: {score}</div>
     </div>
   );
 };

@@ -1,13 +1,19 @@
 import { size, sqrt3, stroke, animationDuration } from "../constants/constants";
 import { EDirection } from "../constants/EDirection";
 import { IBillet } from "../models/IBillet";
-import { updateTileValue, deleteTile, setNeedNewTiles } from "../store/slice";
+import {
+  updateTileValue,
+  deleteTile,
+  setNeedNewTiles,
+  updateScore,
+} from "../store/slice";
 import { AppDispatch } from "../store/store";
 
 export const collapse = (
   collapsePairs: IBillet[][],
   dispatch: AppDispatch,
-  direction: EDirection
+  direction: EDirection,
+  additionMode = false
 ) => {
   collapsePairs.forEach((pair) => {
     const [dest, src] = pair;
@@ -54,6 +60,7 @@ export const collapse = (
     setTimeout(() => {
       collapsePairs.forEach((pair) => {
         const [dest, src] = pair;
+        additionMode && dispatch(updateScore(dest.value! + src.value!));
         dispatch(updateTileValue({ ...dest, value: dest.value! + src.value! }));
         dispatch(updateTileValue({ ...src, value: 0 }));
         dispatch(deleteTile({ ...src }));
