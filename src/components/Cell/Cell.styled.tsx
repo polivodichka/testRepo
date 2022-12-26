@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { size, sqrt3, stroke } from "../../constants/constants";
+import { EColors } from "../../constants/EColor";
 
 export const CellStyled = styled.div.attrs(
   (props: { x: number; y: number; z: number }) => props
@@ -7,7 +8,7 @@ export const CellStyled = styled.div.attrs(
   display: flex;
   height: calc(${size * sqrt3}px );
   width: calc(${size * 2}px );
-  background: red;
+  background: ${EColors.BORDER};
   -webkit-clip-path: polygon(
     25% 0%,
     75% 0%,
@@ -30,7 +31,6 @@ export const CellStyled = styled.div.attrs(
   );
   .inner {
     font-size: 4vw;
-    color: red;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,7 +45,7 @@ export const CellStyled = styled.div.attrs(
       0% 50%
     );
     clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
-    background: white;
+    background: ${EColors.BG};
     background-size: cover;
     margin: auto;
   }
