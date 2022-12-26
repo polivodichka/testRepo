@@ -1,26 +1,24 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { IBillet } from "../models/IBillet";
 import { POST } from "../server/post";
+import { store } from "../store/store";
 
 export const getCoordinates = createAsyncThunk(
   "board/initBoard",
-  async ({ n, oldCoordinates }: { n: number; oldCoordinates?: IBillet[] }) => {
+  async (radius: number) => {
+    const oldCoordinates = store.getState().board.coordinates;
     const coordinates: IBillet[] = oldCoordinates ? [...oldCoordinates] : [];
     if (!oldCoordinates || oldCoordinates.length === 0) {
-      for (let x = -n + 1; x < n; x++) {
-        for (let y = -n + 1; y < n; y++) {
-          for (let z = -n + 1; z < n; z++) {
+      for (let x = -radius + 1; x < radius; x++) {
+        for (let y = -radius + 1; y < radius; y++) {
+          for (let z = -radius + 1; z < radius; z++) {
             if (x + y + z === 0) coordinates.push({ x, y, z });
           }
         }
       }
     }
-    console.log(coordinates);
 
-    const filtred = coordinates.filter((coordinate) => coordinate.value);
-    const values: IBillet[] = await POST(n, filtred);
-
-    console.log(values);
+    const values: IBillet[] = await POST(radius, store.getState().board.tiles);
     values.forEach((value) => {
       const current = coordinates.find(
         (coordinate) =>
@@ -32,7 +30,6 @@ export const getCoordinates = createAsyncThunk(
         const index = coordinates.indexOf(current);
         coordinates[index] = { ...value };
       }
-
     });
     return coordinates;
   }
