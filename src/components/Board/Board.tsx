@@ -27,45 +27,21 @@ const Board = () => {
       const { code } = e;
       switch (code) {
         case "KeyW":
-          if (!keyboardIsAble)
-            return () => {
-              document.removeEventListener("keypress", onKeypress);
-            };
           keyboardIsAble && transform(EDirection.top, dispatch);
           break;
         case "KeyE":
-          if (!keyboardIsAble)
-            return () => {
-              document.removeEventListener("keypress", onKeypress);
-            };
           keyboardIsAble && transform(EDirection.topRight, dispatch);
           break;
         case "KeyQ":
-          if (!keyboardIsAble)
-            return () => {
-              document.removeEventListener("keypress", onKeypress);
-            };
           keyboardIsAble && transform(EDirection.topLeft, dispatch);
           break;
         case "KeyS":
-          if (!keyboardIsAble)
-            return () => {
-              document.removeEventListener("keypress", onKeypress);
-            };
           keyboardIsAble && transform(EDirection.bottom, dispatch);
           break;
         case "KeyD":
-          if (!keyboardIsAble)
-            return () => {
-              document.removeEventListener("keypress", onKeypress);
-            };
           keyboardIsAble && transform(EDirection.bottomRight, dispatch);
           break;
         case "KeyA":
-          if (!keyboardIsAble)
-            return () => {
-              document.removeEventListener("keypress", onKeypress);
-            };
           keyboardIsAble && transform(EDirection.bottomLeft, dispatch);
           break;
       }
@@ -76,7 +52,7 @@ const Board = () => {
     return () => {
       document.removeEventListener("keypress", onKeypress);
     };
-  }, [keyboardIsAble]);
+  }, [dispatch, keyboardIsAble]);
 
   return (
     <BoardStyled className="board">
