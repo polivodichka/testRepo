@@ -13,7 +13,7 @@ const initial: {
   coordinates: [],
   tiles: [],
   keyboard: true,
-  needNewTiles: true,
+  needNewTiles: false,
   gameStatus: EGameStatus.Playing,
   score: 0,
   stepsNumber: 0,
