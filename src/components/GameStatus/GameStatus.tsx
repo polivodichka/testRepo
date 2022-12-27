@@ -1,4 +1,6 @@
 import { useAppSelector } from "../../hooks/hooks";
+import Bee from "../Bee/Bee";
+import { GameStatusStyled } from "./GameStatus.styles";
 
 const GameStatus = () => {
   const { gameStatus, score } = useAppSelector((state) => {
@@ -8,12 +10,13 @@ const GameStatus = () => {
     };
   });
   return (
-    <div>
+    <GameStatusStyled>
+      <Bee />
       <div>
         Game Status: <span data-status={gameStatus}>{gameStatus}</span>
       </div>
       <div>Score: {score}</div>
-    </div>
+    </GameStatusStyled>
   );
 };
 

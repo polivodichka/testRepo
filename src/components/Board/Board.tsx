@@ -6,6 +6,7 @@ import { getCoordinates } from "../../utils/getCoordinates";
 import { transform } from "../../utils/transform";
 import Cell from "../Cell/Cell";
 import Tile from "../Tile/Tile";
+import { BoardStyled } from "./Board.styled";
 
 const Board = () => {
   const { coordinates, tiles, keyboardIsAble } = useAppSelector((state) => {
@@ -51,10 +52,10 @@ const Board = () => {
     return () => {
       document.removeEventListener("keypress", onKeypress);
     };
-  }, [keyboardIsAble]);
+  }, [dispatch, keyboardIsAble]);
 
   return (
-    <div className="board">
+    <BoardStyled className="board">
       {coordinates.map((coordinate) => (
         <Cell
           {...coordinate}
@@ -67,7 +68,7 @@ const Board = () => {
           key={`tile${coordinate.x}${coordinate.y}${coordinate.z}`}
         />
       ))}
-    </div>
+    </BoardStyled>
   );
 };
 
