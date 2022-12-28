@@ -9,6 +9,7 @@ const initial: {
   gameStatus: EGameStatus;
   score: number;
   stepsNumber: number;
+  showModal: boolean;
 } = {
   coordinates: [],
   tiles: [],
@@ -17,5 +18,6 @@ const initial: {
   gameStatus: EGameStatus.Playing,
   score: 0,
   stepsNumber: 0,
+  showModal: false,
 };
 export default initial;

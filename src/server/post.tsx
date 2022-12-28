@@ -3,7 +3,7 @@ import { requests } from "./constants";
 
 export const POST = async (n: number, body?: IBillet[]) => {
   const { TYPE, POST } = requests;
-  const request = await fetch(`http://localhost:13337/${n}`, {
+  const request = await fetch(`https://hex2048-lambda.octa.wtf/${n}`, {
     method: `${POST}`,
     headers: {
       Accept: `${TYPE}`,

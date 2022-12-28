@@ -4,6 +4,7 @@ import { checkGameStatus } from "../utils/checkGameStatus";
 import { getCoordinates } from "../utils/getCoordinates";
 import initialState from "./initial";
 
+
 const BoardSlice = createSlice({
   name: "board",
   initialState,

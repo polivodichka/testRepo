@@ -12,6 +12,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #cfe2f3;
 }
+input, button {
+  font-family: SquareMeal, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+}
 #root {
   display: flex;
   flex-direction: column;
