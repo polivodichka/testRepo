@@ -9,18 +9,21 @@ import Tile from "../Tile/Tile";
 import { BoardStyled } from "./Board.styled";
 
 const Board = () => {
-  const { coordinates, tiles, keyboardIsAble } = useAppSelector((state) => {
-    return {
-      coordinates: state.board.coordinates,
-      tiles: state.board.tiles,
-      keyboardIsAble: state.board.keyboard,
-    };
-  });
+  const { coordinates, tiles, keyboardIsAble, gameRadius } = useAppSelector(
+    (state) => {
+      return {
+        coordinates: state.board.coordinates,
+        tiles: state.board.tiles,
+        keyboardIsAble: state.board.keyboard,
+        gameRadius: state.board.gameRadius,
+      };
+    }
+  );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getCoordinates(radius));
-  }, [dispatch]);
+    dispatch(getCoordinates({ radius, initial: true }));
+  }, [dispatch, gameRadius]);
 
   useEffect(() => {
     const onKeypress = (e: KeyboardEvent) => {

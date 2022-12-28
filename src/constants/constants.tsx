@@ -4,5 +4,5 @@ export const radius = 2;
 export const size =
   (document.documentElement.clientHeight * 0.35) / (2 * radius - 1);
 export const windowWidth = document.documentElement.clientWidth;
-export const animationDuration = 0.2;
+export const animationDuration = 0.13;
 export const beeScale = 0.5;

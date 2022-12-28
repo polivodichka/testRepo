@@ -52,6 +52,9 @@ const BoardSlice = createSlice({
     updateScore(state, action) {
       state.score += action.payload;
     },
+    updateGameRadius(state, action) {
+      state.gameRadius = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getCoordinates.fulfilled, (state, action) => {
@@ -73,5 +76,6 @@ export const {
   setNeedNewTiles,
   setGameStatus,
   updateScore,
+  updateGameRadius,
 } = BoardSlice.actions;
 export default BoardSlice.reducer;

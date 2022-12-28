@@ -4,6 +4,7 @@ import { store } from "../../store/store";
 import Board from "../Board/Board";
 import Description from "../Description/Description";
 import GameStatus from "../GameStatus/GameStatus";
+import LevelControl from "../LevelControl/LevelControl";
 
 export const App: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ export const App: React.FC = () => {
         <GameStatus />
         <Board />
         <Description />
+        <LevelControl/>
       </div>
     </Provider>
   );

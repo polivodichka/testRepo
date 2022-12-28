@@ -44,7 +44,8 @@ export const transform = (direction: EDirection, dispatch: AppDispatch) => {
     sortTable(table2D, direction);
     shiftToEnd(direction, table2D, dispatch);
     setTimeout(() => {
-      store.getState().board.needNewTiles && dispatch(getCoordinates(radius));
+      store.getState().board.needNewTiles &&
+        dispatch(getCoordinates({ radius }));
       dispatch(setNeedNewTiles(false));
       dispatch(enableKeyboard());
     }, animationDuration * 1000 + 0.1);
