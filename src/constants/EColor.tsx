@@ -10,8 +10,11 @@ export const enum EColors {
   "C512" = "#FFBECE",
   "C1024" = "#FF9CAD",
   "C2048" = "#ffe599",
+  "MainBG" = "#cfe2f3",
+  "ModalBG" = "rgba(255, 255, 255, 0.7)",
   "BG" = "#ffe599",
   "BORDER" = "#fff7e0",
   "BeeBody" = "#fcd658",
   "BeeStripe" = "#61555a",
+  "ButtonHover" = "#ffd341",
 }

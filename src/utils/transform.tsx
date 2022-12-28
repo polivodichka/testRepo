@@ -1,4 +1,4 @@
-import { animationDuration, radius } from "../constants/constants";
+import { animationDuration } from "../constants/constants";
 import { EDirection } from "../constants/EDirection";
 import { IBillet } from "../models/IBillet";
 import {
@@ -14,6 +14,7 @@ import { shiftToEnd } from "./shiftTilesToEnd";
 import { sortTable } from "./sortTable";
 
 export const transform = (direction: EDirection, dispatch: AppDispatch) => {
+  const radius = store.getState().board.gameRadius;
   dispatch(disableKeyboard());
   let collapsePairs: IBillet[][] = [];
   let table2D: IBillet[][] = [];
@@ -21,16 +22,16 @@ export const transform = (direction: EDirection, dispatch: AppDispatch) => {
   switch (direction) {
     case EDirection.top:
     case EDirection.bottom:
-      getTable2D = getXY;
+      getTable2D = getXY(radius);
       break;
     case EDirection.topLeft:
     case EDirection.bottomRight:
-      getTable2D = getZX;
+      getTable2D = getZX(radius);
       break;
 
     case EDirection.topRight:
     case EDirection.bottomLeft:
-      getTable2D = getYZ;
+      getTable2D = getYZ(radius);
       break;
   }
 

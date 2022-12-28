@@ -10,6 +10,7 @@ const initial: {
   score: number;
   stepsNumber: number;
   gameRadius: number;
+  tileSize: number;
 } = {
   coordinates: [],
   tiles: [],
@@ -19,5 +20,8 @@ const initial: {
   score: 0,
   stepsNumber: 0,
   gameRadius: 2,
+  tileSize: 0,
 };
+initial.tileSize =
+  (document.documentElement.clientHeight * 0.35) / (2 * initial.gameRadius - 1);
 export default initial;

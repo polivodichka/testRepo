@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { radius } from "../../constants/constants";
 import { EDirection } from "../../constants/EDirection";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { resetTileSize, updateGameRadius } from "../../store/slice";
 import { getCoordinates } from "../../utils/getCoordinates";
 import { transform } from "../../utils/transform";
 import Cell from "../Cell/Cell";
@@ -9,20 +9,22 @@ import Tile from "../Tile/Tile";
 import { BoardStyled } from "./Board.styled";
 
 const Board = () => {
-  const { coordinates, tiles, keyboardIsAble, gameRadius } = useAppSelector(
-    (state) => {
+  const { coordinates, tiles, keyboardIsAble, gameRadius, tileSize } =
+    useAppSelector((state) => {
       return {
         coordinates: state.board.coordinates,
         tiles: state.board.tiles,
         keyboardIsAble: state.board.keyboard,
         gameRadius: state.board.gameRadius,
+        tileSize: state.board.tileSize,
       };
-    }
-  );
+    });
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getCoordinates({ radius, initial: true }));
+    dispatch(getCoordinates({ radius: gameRadius, initial: true }));
+    const urlRadius = +global.location.pathname.replace(/\D/g, "");
+    dispatch(updateGameRadius(urlRadius ? urlRadius : 2));
   }, [dispatch, gameRadius]);
 
   useEffect(() => {
@@ -58,7 +60,7 @@ const Board = () => {
   }, [dispatch, keyboardIsAble]);
 
   return (
-    <BoardStyled className="board">
+    <BoardStyled className="board" size={tileSize} radius={gameRadius}>
       {coordinates.map((coordinate) => (
         <Cell
           {...coordinate}

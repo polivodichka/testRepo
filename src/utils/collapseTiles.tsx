@@ -1,4 +1,4 @@
-import { size, sqrt3, stroke, animationDuration } from "../constants/constants";
+import { sqrt3, stroke, animationDuration } from "../constants/constants";
 import { EDirection } from "../constants/EDirection";
 import { IBillet } from "../models/IBillet";
 import {
@@ -7,7 +7,7 @@ import {
   setNeedNewTiles,
   updateScore,
 } from "../store/slice";
-import { AppDispatch } from "../store/store";
+import { AppDispatch, store } from "../store/store";
 
 export const collapse = (
   collapsePairs: IBillet[][],
@@ -15,6 +15,7 @@ export const collapse = (
   direction: EDirection,
   additionMode = false
 ) => {
+  const size = store.getState().board.tileSize;
   collapsePairs.forEach((pair) => {
     const [dest, src] = pair;
     if (dest.x === src.x && dest.y === src.y && dest.z === src.z) return;

@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import { radius, size } from "../../constants/constants";
 
-export const BoardStyled = styled.div`
+export const BoardStyled = styled.div.attrs(
+  (props: { size: number; radius: number }) => props
+)`
   position: relative;
   box-sizing: border-box;
-  height: ${size * 2 * (radius * 2 - 1.25)}px;
-  
+  height: ${(props) => props.size * 2 * (props.radius * 2 - 1.25)}px;
+
   clear: both;
 `;

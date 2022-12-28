@@ -1,10 +1,10 @@
 import { IBillet } from "../models/IBillet";
 import { getXY, getYZ, getZX } from "./getTable";
 
-export const checkGameStatus = (coordinates: IBillet[]) => {
-  const xy = getXY(coordinates);
-  const yz = getYZ(coordinates);
-  const zx = getZX(coordinates);
+export const checkGameStatus = (coordinates: IBillet[], radius: number) => {
+  const xy = getXY(radius)(coordinates);
+  const yz = getYZ(radius)(coordinates);
+  const zx = getZX(radius)(coordinates);
   const cellsNum = coordinates.length;
   const freeCells = cellsNum > xy.flat().length;
 

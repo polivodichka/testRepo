@@ -1,22 +1,17 @@
 import styled from "styled-components";
-import {
-  animationDuration,
-  size,
-  sqrt3,
-  stroke,
-} from "../../constants/constants";
+import { animationDuration, sqrt3, stroke } from "../../constants/constants";
 import { EColors } from "../../constants/EColor";
 
 export const TileStyled = styled.div.attrs(
-  (props: { x: number; y: number; z: number }) => props
+  (props: { x: number; y: number; z: number; size: number }) => props
 )`
   display: flex;
   color: ${EColors.BeeStripe};
   justify-content: center;
   align-items: center;
-  font-size: calc(${size / 2.3}px);
-  height: calc(${size * sqrt3 - stroke * 2}px);
-  width: calc(${size * 2 - stroke * 2}px);
+  font-size: calc(${(props) => props.size / 2.3}px);
+  height: calc(${(props) => props.size * sqrt3 - stroke * 2}px);
+  width: calc(${(props) => props.size * 2 - stroke * 2}px);
   -webkit-clip-path: polygon(
     25% 0%,
     75% 0%,
@@ -28,12 +23,14 @@ export const TileStyled = styled.div.attrs(
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
   position: absolute;
   top: calc(
-    50% - (${size * sqrt3}px) / 2 * (1 + ${(props) => props.x + 2 * props.y}) +
+    50% - (${(props) => props.size * sqrt3}px) / 2 *
+      (1 + ${(props) => props.x + 2 * props.y}) +
       ${(props) => stroke * props.y + (stroke / sqrt3) * props.x}px +
       ${stroke}px
   );
   right: calc(
-    50% - (${size * 2}px) / 2 - ${(props) => props.x} * (${size * 2}px) / 1.325 -
+    50% - (${(props) => props.size * 2}px) / 2 - ${(props) => props.x} *
+      (${(props) => props.size * 2}px) / 1.325 -
       ${(props) => stroke * (props.y + props.z)}px + ${stroke}px
   );
 

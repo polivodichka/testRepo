@@ -54,13 +54,19 @@ const BoardSlice = createSlice({
     },
     updateGameRadius(state, action) {
       state.gameRadius = action.payload;
+      state.tileSize =
+        (document.documentElement.clientHeight * 0.35) /
+        (2 * action.payload - 1);
+    },
+    resetTileSize(state) {
+      state.tileSize = 0;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(getCoordinates.fulfilled, (state, action) => {
       state.coordinates = action.payload;
       state.tiles = action.payload.filter((tile) => tile.value);
-      state.gameStatus = checkGameStatus(state.coordinates)
+      state.gameStatus = checkGameStatus(state.coordinates, state.gameRadius)
         ? EGameStatus.Playing
         : EGameStatus.GameOver;
     });
@@ -77,5 +83,6 @@ export const {
   setGameStatus,
   updateScore,
   updateGameRadius,
+  resetTileSize,
 } = BoardSlice.actions;
 export default BoardSlice.reducer;
