@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 
 import { EDirection } from "../../constants/EDirection";
+import { EGameStatus } from "../../constants/EGameStatus";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { resetTileSize, updateGameRadius } from "../../store/slice";
+import { setGameStatus } from "../../store/slice";
 import { getCoordinates } from "../../utils/getCoordinates";
 import { transform } from "../../utils/transform";
 import Cell from "../Cell/Cell";
@@ -10,21 +11,29 @@ import Tile from "../Tile/Tile";
 import { BoardStyled } from "./Board.styled";
 
 const Board = () => {
-  const { coordinates, tiles, keyboardIsAble, gameRadius, tileSize } =
-    useAppSelector((state) => {
-      return {
-        coordinates: state.board.coordinates,
-        tiles: state.board.tiles,
-        keyboardIsAble: state.board.keyboard,
-        gameRadius: state.board.gameRadius,
-        tileSize: state.board.tileSize,
-      };
-    });
+  const {
+    coordinates,
+    tiles,
+    keyboardIsAble,
+    gameRadius,
+    tileSize,
+    restartGameFlag,
+  } = useAppSelector((state) => {
+    return {
+      coordinates: state.board.coordinates,
+      tiles: state.board.tiles,
+      keyboardIsAble: state.board.keyboard,
+      gameRadius: state.board.gameRadius,
+      tileSize: state.board.tileSize,
+      restartGameFlag: state.board.restartFlag,
+    };
+  });
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    dispatch(setGameStatus(EGameStatus.Playing));
     dispatch(getCoordinates({ radius: gameRadius, initial: true }));
-  }, [dispatch, gameRadius]);
+  }, [dispatch, gameRadius, restartGameFlag]);
 
   useEffect(() => {
     const onKeypress = (e: KeyboardEvent) => {

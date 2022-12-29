@@ -24,6 +24,10 @@ export const LevelButton = styled.button.attrs(
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
     "Helvetica Neue", sans-serif;
   cursor: pointer;
+  transition: background 0.2s ease-in-out;
+  &:hover {
+    background-color: ${EColors.BORDER};
+  }
   &:before {
     display: block;
     position: absolute;

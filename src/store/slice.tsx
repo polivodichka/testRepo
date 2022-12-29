@@ -57,6 +57,9 @@ const BoardSlice = createSlice({
     updateScore(state, action) {
       state.score += action.payload;
     },
+    resetScore(state) {
+      state.score = 0;
+    },
     updateGameRadius(state, action) {
       state.gameRadius = action.payload;
       state.tileSize =
@@ -65,6 +68,9 @@ const BoardSlice = createSlice({
     },
     resetTileSize(state) {
       state.tileSize = 0;
+    },
+    restartGame(state) {
+      state.restartFlag = !state.restartFlag;
     },
   },
   extraReducers: (builder) => {
@@ -90,5 +96,7 @@ export const {
   updateScore,
   updateGameRadius,
   resetTileSize,
+  restartGame,
+  resetScore,
 } = BoardSlice.actions;
 export default BoardSlice.reducer;

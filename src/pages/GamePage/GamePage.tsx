@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import Bee from "../../components/Bee/Bee";
 import Board from "../../components/Board/Board";
 import Description from "../../components/Description/Description";
+import GameOverBtn from "../../components/GameOverBtn/GameOverBtn";
 import GameStatus from "../../components/GameStatus/GameStatus";
 import LevelControl from "../../components/LevelControl/LevelControl";
 import { useAppDispatch } from "../../hooks/hooks";
@@ -18,6 +19,7 @@ const GamePage = () => {
   return (
     <GamePageStyled>
       <RawStyyled>
+        <GameOverBtn />
         <Bee />
         <GameStatus />
       </RawStyyled>
