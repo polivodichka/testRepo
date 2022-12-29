@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { maxTileValue } from "../constants/constants";
 
+import { maxTileValue } from "../constants/constants";
 import { EGameStatus } from "../constants/EGameStatus";
 import { checkGameStatus } from "../utils/checkGameStatus";
 import { getCoordinates } from "../utils/getCoordinates";

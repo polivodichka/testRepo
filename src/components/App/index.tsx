@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import { useAppSelector } from "../../hooks/hooks";
 
+import { useAppSelector } from "../../hooks/hooks";
 import ErrorPage from "../../pages/ErrorPage/ErrorPage";
 import GamePage from "../../pages/GamePage/GamePage";
 

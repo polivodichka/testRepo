@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { EColors } from "../../constants/EColor";
 import { TileStyled } from "../Tile/Tile.styled";
 
