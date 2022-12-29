@@ -4,8 +4,8 @@ import { IBillet } from "../models/IBillet";
 const initial: {
   coordinates: IBillet[];
   tiles: IBillet[];
-  keyboard: Boolean;
-  needNewTiles: Boolean;
+  keyboard: boolean;
+  needNewTiles: boolean;
   gameStatus: EGameStatus;
   score: number;
   stepsNumber: number;

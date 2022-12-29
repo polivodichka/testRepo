@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+
 import { EDirection } from "../../constants/EDirection";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { resetTileSize, updateGameRadius } from "../../store/slice";
@@ -23,8 +24,6 @@ const Board = () => {
 
   useEffect(() => {
     dispatch(getCoordinates({ radius: gameRadius, initial: true }));
-    const urlRadius = +global.location.pathname.replace(/\D/g, "");
-    dispatch(updateGameRadius(urlRadius ? urlRadius : 2));
   }, [dispatch, gameRadius]);
 
   useEffect(() => {

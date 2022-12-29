@@ -1,11 +1,7 @@
 import { DescriptionStyled } from "./Description.styled";
 
-const Description = () => {
-  return (
-    <DescriptionStyled>
-      Help this little bee to clean the honeycomb
-    </DescriptionStyled>
-  );
+const Description = ({ message }: { message: string }) => {
+  return <DescriptionStyled>{message}</DescriptionStyled>;
 };
 
 export default Description;

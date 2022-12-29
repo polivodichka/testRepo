@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+
 import { IBillet } from "../models/IBillet";
 import { POST } from "../server/post";
 import { store } from "../store/store";
@@ -10,7 +11,7 @@ export const getCoordinates = createAsyncThunk(
     const tiles = initial ? [] : store.getState().board.tiles;
     const coordinates: IBillet[] = oldCoordinates ? [...oldCoordinates] : [];
 
-    if (!oldCoordinates || !!!oldCoordinates.length) {
+    if (!oldCoordinates || !oldCoordinates.length) {
       for (let x = -radius + 1; x < radius; x++) {
         for (let y = -radius + 1; y < radius; y++) {
           for (let z = -radius + 1; z < radius; z++) {

@@ -1,39 +1,38 @@
+import React from "react";
 import { Link } from "react-router-dom";
+
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { resetTileSize, updateGameRadius } from "../../store/slice";
-import { LevelButton } from "./LevelControl.styled";
+import { resetBoard, updateGameRadius } from "../../store/slice";
+import { LevelButton, LevelWrapper } from "./LevelControl.styled";
 
 const LevelControl = () => {
-  const range = useAppSelector((state) => state.board.gameRadius);
+  const currentLevel = useAppSelector((state) => state.board.gameRadius);
   const dispatch = useAppDispatch();
 
-  const handleClick = () => {
-    dispatch(resetTileSize());
-    dispatch(updateGameRadius(2));
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    dispatch(resetBoard());
+    dispatch(updateGameRadius(+(e.target as HTMLButtonElement).title));
   };
+  const buttons = [
+    { value: 2, active: currentLevel === 2 },
+    { value: 3, active: currentLevel === 3 },
+    { value: 4, active: currentLevel === 4 },
+    { value: 5, active: currentLevel === 5 },
+  ];
   return (
-    <>
-      <Link to={"/2"}>
-        <LevelButton
-          levelColor={"red"}
-          title={"2"}
-          state={false}
-          onClick={handleClick}
-        >
-          2
-        </LevelButton>
-      </Link>
-      <Link to={"/3"}>
-        <LevelButton
-          levelColor={"red"}
-          title={"3"}
-          state={true}
-          onClick={handleClick}
-        >
-          3
-        </LevelButton>
-      </Link>
-    </>
+    <LevelWrapper>
+      {buttons.map((button) => (
+        <Link to={`/${button.value}`} key={button.value}>
+          <LevelButton
+            title={`${button.value}`}
+            state={!button.active}
+            onClick={handleClick}
+          >
+            {button.value}
+          </LevelButton>
+        </Link>
+      ))}
+    </LevelWrapper>
   );
 };
 

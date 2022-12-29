@@ -1,11 +1,12 @@
+import { prop } from "ramda";
 import styled from "styled-components";
+import { sqrt3, stroke } from "../../constants/constants";
 
 export const BoardStyled = styled.div.attrs(
   (props: { size: number; radius: number }) => props
 )`
   position: relative;
   box-sizing: border-box;
-  height: ${(props) => props.size * 2 * (props.radius * 2 - 1.25)}px;
-
+  height: 100%;
   clear: both;
 `;

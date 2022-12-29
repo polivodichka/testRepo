@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { windowWidth } from "../../constants/constants";
 import { EColors } from "../../constants/EColor";
 

@@ -1,44 +1,22 @@
-import { Provider } from "react-redux";
-import { Navigate, Route, Routes } from "react-router-dom";
-import { store } from "../../store/store";
-import Board from "../Board/Board";
-import Description from "../Description/Description";
-import GameStatus from "../GameStatus/GameStatus";
-import LevelControl from "../LevelControl/LevelControl";
+import { Route, Routes } from "react-router-dom";
+import { useAppSelector } from "../../hooks/hooks";
+
+import ErrorPage from "../../pages/ErrorPage/ErrorPage";
+import GamePage from "../../pages/GamePage/GamePage";
 
 const App = () => {
+  const radius = useAppSelector((state) => state.board.gameRadius);
   return (
-    <Provider store={store}>
+    <>
       <Routes>
         <Route
           path="/:radius"
-          element={
-            +global.location.pathname.replace(/\D/g, "") <= 5 &&
-            +global.location.pathname.replace(/\D/g, "") >= 2 ? (
-              <>
-                <GameStatus />
-                <Board />
-                <Description />
-                <LevelControl />
-              </>
-            ) : (
-              <Navigate replace to={"/"} />
-            )
-          }
+          element={radius >= 2 && radius <= 5 ? <GamePage /> : <ErrorPage />}
         />
-        <Route
-          path="/"
-          element={
-            <>
-              <GameStatus />
-              <Board />
-              <Description />
-              <LevelControl />
-            </>
-          }
-        />
+        <Route path="/" element={<GamePage />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
-    </Provider>
+    </>
   );
 };
 

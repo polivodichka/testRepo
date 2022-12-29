@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 import { EGameStatus } from "../constants/EGameStatus";
 import { checkGameStatus } from "../utils/checkGameStatus";
 import { getCoordinates } from "../utils/getCoordinates";
@@ -10,6 +11,10 @@ const BoardSlice = createSlice({
   reducers: {
     setBoard(state, action) {
       state.coordinates = action.payload;
+    },
+    resetBoard(state) {
+      state.coordinates = [];
+      state.tiles = [];
     },
     updateTileValue(state, action) {
       const { x, y, z, value } = action.payload;
@@ -75,6 +80,7 @@ const BoardSlice = createSlice({
 
 export const {
   setBoard,
+  resetBoard,
   updateTileValue,
   deleteTile,
   disableKeyboard,

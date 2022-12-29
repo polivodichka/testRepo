@@ -50,5 +50,5 @@ export const transform = (direction: EDirection, dispatch: AppDispatch) => {
       dispatch(setNeedNewTiles(false));
       dispatch(enableKeyboard());
     }, animationDuration * 1000 + 0.1);
-  }, (animationDuration * 1000 + 0.1) * (!!collapsePairs.length ? 1 : 0));
+  }, (animationDuration * 1000 + 0.1) * (collapsePairs.length ? 1 : 0));
 };
