@@ -1,11 +1,9 @@
 import { useEffect } from "react";
-
-import { EDirection } from "../../constants/EDirection";
 import { EGameStatus } from "../../constants/EGameStatus";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { setGameStatus } from "../../store/slice";
 import { getCoordinates } from "../../utils/getCoordinates";
-import { transform } from "../../utils/transform";
+import { makeMove } from "../../utils/makeMove";
 import Cell from "../Cell/Cell";
 import Tile from "../Tile/Tile";
 import { BoardStyled } from "./Board.styled";
@@ -38,30 +36,10 @@ const Board = () => {
   useEffect(() => {
     const onKeypress = (e: KeyboardEvent) => {
       const { code } = e;
-      switch (code) {
-        case "KeyW":
-          keyboardIsAble && transform(EDirection.top, dispatch);
-          break;
-        case "KeyE":
-          keyboardIsAble && transform(EDirection.topRight, dispatch);
-          break;
-        case "KeyQ":
-          keyboardIsAble && transform(EDirection.topLeft, dispatch);
-          break;
-        case "KeyS":
-          keyboardIsAble && transform(EDirection.bottom, dispatch);
-          break;
-        case "KeyD":
-          keyboardIsAble && transform(EDirection.bottomRight, dispatch);
-          break;
-        case "KeyA":
-          keyboardIsAble && transform(EDirection.bottomLeft, dispatch);
-          break;
-      }
+      makeMove(code, keyboardIsAble, dispatch);
     };
 
     document.addEventListener("keypress", onKeypress);
-
     return () => {
       document.removeEventListener("keypress", onKeypress);
     };
