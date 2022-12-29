@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { EGameStatus } from "../../constants/EGameStatus";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { setGameStatus } from "../../store/slice";
+import { disableKeyboard, setGameStatus } from "../../store/slice";
 import { getCoordinates } from "../../utils/getCoordinates";
 import { makeMove } from "../../utils/makeMove";
 import Cell from "../Cell/Cell";
+import RestartBtn from "../RestartBtn.tsx/RestartBtn";
 import Tile from "../Tile/Tile";
 import { BoardStyled } from "./Board.styled";
 
@@ -14,6 +15,7 @@ const Board = () => {
     tiles,
     keyboardIsAble,
     gameRadius,
+    gameStatus,
     tileSize,
     restartGameFlag,
   } = useAppSelector((state) => {
@@ -22,6 +24,7 @@ const Board = () => {
       tiles: state.board.tiles,
       keyboardIsAble: state.board.keyboard,
       gameRadius: state.board.gameRadius,
+      gameStatus: state.board.gameStatus,
       tileSize: state.board.tileSize,
       restartGameFlag: state.board.restartFlag,
     };
@@ -34,11 +37,16 @@ const Board = () => {
   }, [dispatch, gameRadius, restartGameFlag]);
 
   useEffect(() => {
+    if (gameStatus === EGameStatus.Win) dispatch(disableKeyboard());
+  }, [dispatch, gameStatus]);
+
+  useEffect(() => {
     const onKeypress = (e: KeyboardEvent) => {
       const { code } = e;
       makeMove(code, keyboardIsAble, dispatch);
     };
 
+    document.addEventListener("keypress", onKeypress);
     document.addEventListener("keypress", onKeypress);
     return () => {
       document.removeEventListener("keypress", onKeypress);
@@ -59,6 +67,7 @@ const Board = () => {
           key={`tile${coordinate.x}${coordinate.y}${coordinate.z}`}
         />
       ))}
+      {gameStatus === EGameStatus.Win && <RestartBtn />}
     </BoardStyled>
   );
 };

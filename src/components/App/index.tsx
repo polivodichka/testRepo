@@ -13,8 +13,8 @@ const App = () => {
           path="/:radius"
           element={radius >= 2 && radius <= 5 ? <GamePage /> : <ErrorPage />}
         />
+        <Route path="/*" element={<ErrorPage />} />
         <Route path="/" element={<GamePage />} />
-        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
   );

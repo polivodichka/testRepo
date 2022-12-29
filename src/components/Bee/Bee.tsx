@@ -8,7 +8,9 @@ const Bee = () => {
   return (
     <GameStatusStyled>
       <BeeStyled
-        className={gameStatus === EGameStatus.GameOver ? "moveOut" : "moveIn"}
+        className={`${
+          gameStatus === EGameStatus.GameOver ? "moveOut" : "moveIn"
+        } ${gameStatus === EGameStatus.Win && "winnerDance"}`}
       >
         <div className="bee">
           <div className="antennae"></div>

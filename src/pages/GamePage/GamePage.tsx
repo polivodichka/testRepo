@@ -14,13 +14,16 @@ import { GamePageStyled, RawStyyled } from "./GamePage.styled";
 
 const GamePage = () => {
   const [startSwipe, setStartSwipe] = useState<[number, number]>([0, 0]);
-  const [endSwipe, setEndSwipe] = useState<[number, number]>([0, 0]);
 
   const dispatch = useAppDispatch();
   const keyboardIsAble = useAppSelector((state) => state.board.keyboard);
   useEffect(() => {
     const urlRadius = +global.location.pathname.replace(/\D/g, "");
-    dispatch(updateGameRadius(urlRadius ? urlRadius : 2));
+    dispatch(
+      updateGameRadius(
+        urlRadius ? urlRadius : global.location.pathname === "/" ? 2 : 0
+      )
+    );
   }, [dispatch]);
 
   const handleTouchStartEvent = (e: TouchEvent<HTMLDivElement>) => {
@@ -29,7 +32,6 @@ const GamePage = () => {
   };
   const handleTouchEndEvent = (e: TouchEvent<HTMLDivElement>) => {
     const { clientX, clientY } = e.changedTouches[0];
-    setEndSwipe(() => [clientX, clientY]);
     makeMove(
       determineSwipeDirection(startSwipe, [clientX, clientY]),
       keyboardIsAble,

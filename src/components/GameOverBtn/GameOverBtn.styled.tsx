@@ -21,7 +21,7 @@ export const GameOverBtnStyled = styled.button`
   transform: scale(0);
   transition: background 0.2s ease-in-out, transform 0.2s ease-in-out 0s;
   &:hover {
-    background-color: transparent;
+    background-color: ${EColors.BORDER};
   }
   &.show {
     transition: background 0.2s ease-in-out, transform 0.2s ease-in-out 2s;

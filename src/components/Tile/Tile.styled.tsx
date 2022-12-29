@@ -71,4 +71,22 @@ export const TileStyled = styled.div.attrs(
   &.tile2048 {
     background: ${EColors.C2048};
   }
+  &.hide {
+    animation: hideTile ease-in-out 1.5s normal;
+    animation-fill-mode: forwards;
+  }
+  @keyframes hideTile {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    10% {
+      transform: scale(1.02);
+    }
+    50%,
+    100% {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+  }
 `;

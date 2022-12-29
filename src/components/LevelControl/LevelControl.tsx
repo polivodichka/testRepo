@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { resetBoard, updateGameRadius } from "../../store/slice";
+import { resetBoard, resetScore, updateGameRadius } from "../../store/slice";
 import { LevelButton, LevelWrapper } from "./LevelControl.styled";
 
 const LevelControl = () => {
@@ -11,6 +11,7 @@ const LevelControl = () => {
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     dispatch(resetBoard());
+    dispatch(resetScore());
     dispatch(updateGameRadius(+(e.target as HTMLButtonElement).title));
   };
   const buttons = [

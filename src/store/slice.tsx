@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { maxTileValue } from "../constants/constants";
 
 import { EGameStatus } from "../constants/EGameStatus";
 import { checkGameStatus } from "../utils/checkGameStatus";
@@ -70,7 +71,9 @@ const BoardSlice = createSlice({
       state.tileSize = 0;
     },
     restartGame(state) {
+      state.tiles = [];
       state.restartFlag = !state.restartFlag;
+      state.keyboard = true;
     },
   },
   extraReducers: (builder) => {
@@ -80,6 +83,11 @@ const BoardSlice = createSlice({
       state.gameStatus = checkGameStatus(state.coordinates, state.gameRadius)
         ? EGameStatus.Playing
         : EGameStatus.GameOver;
+      if (
+        Math.max(...state.tiles.map((tile) => tile.value ?? 0)) === maxTileValue
+      ) {
+        state.gameStatus = EGameStatus.Win;
+      }
     });
   },
 });
