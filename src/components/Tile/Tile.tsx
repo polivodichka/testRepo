@@ -1,4 +1,3 @@
-import { EGameStatus } from "../../constants/EGameStatus";
 import { useAppSelector } from "../../hooks/hooks";
 import { ITile } from "../../models/ITile";
 import { IsGameWin } from "../../utils/checkGameStatus";
