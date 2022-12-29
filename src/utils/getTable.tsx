@@ -1,9 +1,8 @@
-import { radius } from "../constants/constants";
 import { IBillet } from "../models/IBillet";
 import { store } from "../store/store";
 
 //top-bottom
-export const getXY = (coordinates: IBillet[]) => {
+export const getXY = (radius: number) => (coordinates: IBillet[]) => {
   const xy = [];
   for (let i = -radius + 1; i < radius; i++) {
     const row = coordinates.filter(
@@ -15,7 +14,7 @@ export const getXY = (coordinates: IBillet[]) => {
 };
 
 //topLeft-bottomRight
-export const getZX = (coordinates: IBillet[]) => {
+export const getZX = (radius: number) => (coordinates: IBillet[]) => {
   const zx = [];
   for (let i = -radius + 1; i < radius; i++) {
     const row = coordinates.filter(
@@ -27,7 +26,7 @@ export const getZX = (coordinates: IBillet[]) => {
 };
 
 //topRight-bottomLeft
-export const getYZ = (coordinates: IBillet[]) => {
+export const getYZ = (radius: number) => (coordinates: IBillet[]) => {
   const yz = [];
   for (let i = -radius + 1; i < radius; i++) {
     const row = coordinates.filter(

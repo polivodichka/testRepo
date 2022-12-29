@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { windowWidth } from "../../constants/constants";
 import { EColors } from "../../constants/EColor";
 
@@ -12,6 +13,9 @@ export const BeeStyled = styled.div`
   &.moveOut {
     transition: transform 2s ease-in;
     transform: scale(0.5) translateX(${windowWidth + 100}px);
+  }
+  &.moveIn {
+    animation: moveIn ease-in-out 2s normal;
   }
   &.winnerDance {
     animation: circle linear 1.5s normal;
@@ -218,6 +222,14 @@ export const BeeStyled = styled.div`
     }
     100% {
       transform: scale(0.5) rotate(360deg) translateX(0);
+    }
+  }
+  @keyframes moveIn {
+    0% {
+      transform: scale(0.5) translateX(${-windowWidth - 100}px);
+    }
+    100% {
+      transform: scale(0.5) translateX(0);
     }
   }
 `;

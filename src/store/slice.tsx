@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+
+import { maxTileValue } from "../constants/constants";
 import { EGameStatus } from "../constants/EGameStatus";
 import { checkGameStatus } from "../utils/checkGameStatus";
 import { getCoordinates } from "../utils/getCoordinates";
@@ -10,6 +12,10 @@ const BoardSlice = createSlice({
   reducers: {
     setBoard(state, action) {
       state.coordinates = action.payload;
+    },
+    resetBoard(state) {
+      state.coordinates = [];
+      state.tiles = [];
     },
     updateTileValue(state, action) {
       const { x, y, z, value } = action.payload;
@@ -52,20 +58,43 @@ const BoardSlice = createSlice({
     updateScore(state, action) {
       state.score += action.payload;
     },
+    resetScore(state) {
+      state.score = 0;
+    },
+    updateGameRadius(state, action) {
+      state.gameRadius = action.payload;
+      state.tileSize =
+        (document.documentElement.clientHeight * 0.35) /
+        (2 * action.payload - 1);
+    },
+    resetTileSize(state) {
+      state.tileSize = 0;
+    },
+    restartGame(state) {
+      state.tiles = [];
+      state.restartFlag = !state.restartFlag;
+      state.keyboard = true;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getCoordinates.fulfilled, (state, action) => {
       state.coordinates = action.payload;
       state.tiles = action.payload.filter((tile) => tile.value);
-      state.gameStatus = checkGameStatus(state.coordinates)
+      state.gameStatus = checkGameStatus(state.coordinates, state.gameRadius)
         ? EGameStatus.Playing
         : EGameStatus.GameOver;
+      if (
+        Math.max(...state.tiles.map((tile) => tile.value ?? 0)) === maxTileValue
+      ) {
+        state.gameStatus = EGameStatus.Win;
+      }
     });
   },
 });
 
 export const {
   setBoard,
+  resetBoard,
   updateTileValue,
   deleteTile,
   disableKeyboard,
@@ -73,5 +102,9 @@ export const {
   setNeedNewTiles,
   setGameStatus,
   updateScore,
+  updateGameRadius,
+  resetTileSize,
+  restartGame,
+  resetScore,
 } = BoardSlice.actions;
 export default BoardSlice.reducer;

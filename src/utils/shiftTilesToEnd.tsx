@@ -1,7 +1,6 @@
-import { radius } from "../constants/constants";
 import { EDirection } from "../constants/EDirection";
 import { IBillet } from "../models/IBillet";
-import { AppDispatch } from "../store/store";
+import { AppDispatch, store } from "../store/store";
 import { collapse } from "./collapseTiles";
 
 export const shiftToEnd = (
@@ -9,6 +8,7 @@ export const shiftToEnd = (
   table: IBillet[][],
   dispatch: AppDispatch
 ) => {
+  const radius = store.getState().board.gameRadius;
   switch (direction) {
     case EDirection.top:
       table.forEach((tilesArray) => {

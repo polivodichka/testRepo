@@ -11,7 +11,6 @@ const GameStatus = () => {
   });
   return (
     <GameStatusStyled>
-      <Bee />
       <div>
         Game Status: <span data-status={gameStatus}>{gameStatus}</span>
       </div>

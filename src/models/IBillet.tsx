@@ -1,6 +1,6 @@
 export interface IBillet {
-    x: number;
-    y: number;
-    z: number;
-    value?: number;
+  x: number;
+  y: number;
+  z: number;
+  value?: number;
 }
