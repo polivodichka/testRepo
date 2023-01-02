@@ -1,5 +1,23 @@
-import React from "react"
+import { Route, Routes } from "react-router-dom";
 
-export const App: React.FC = () => {
-  return <div>your game should be here</div>
-}
+import { useAppSelector } from "../../hooks/hooks";
+import ErrorPage from "../../pages/ErrorPage/ErrorPage";
+import GamePage from "../../pages/GamePage/GamePage";
+
+const App = () => {
+  const radius = useAppSelector((state) => state.board.gameRadius);
+  return (
+    <>
+      <Routes>
+        <Route
+          path="/:radius"
+          element={radius >= 2 && radius <= 5 ? <GamePage /> : <ErrorPage />}
+        />
+        <Route path="/*" element={<ErrorPage />} />
+        <Route path="/" element={<GamePage />} />
+      </Routes>
+    </>
+  );
+};
+
+export default App;
